@@ -26,6 +26,7 @@ const schema = buildSchema(`
 
   type Mutation {
     addClient(name: String, email: String, phone: String): Client
+    deleteClient(id: ID!): Client
   }
 `);
 
@@ -50,6 +51,17 @@ const root = {
   addClient: (args) => {
     clients.push({ id: clients.length, ...args });
     return clients[clients.length - 1];
+  },
+  deleteClient: ({ id }) => {
+    const index = clients.findIndex((client) => client.id === id);
+    if (index === -1) return null;
+
+    [deletedClient] = clients.splice(
+      clients.findIndex((client) => client.id === id),
+      1
+    );
+
+    return deletedClient;
   },
 };
 
