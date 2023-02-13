@@ -11,10 +11,10 @@ const schema = buildSchema(`
 
   type Project {
     id: ID!,
-    clientID: ID!,
     name: String!
     description: String!,
-    status: String!
+    status: String!,
+    client: Client!
   }
 
   type Query {
@@ -27,14 +27,15 @@ const schema = buildSchema(`
   type Mutation {
     addClient(name: String, email: String, phone: String): Client
     deleteClient(id: ID!): Client
-    addProject(clientID: ID!, name: String!, description: String!, status: String!): Project
+    addProject(clientId: ID!, name: String!, description: String!, status: String!): Project
     deleteProject(id: ID!): Project
   }
 `);
 
-// addProject(project: Project!)
-// deleteProject(id: ID!)
-// updateProject(project: Project!)
+const getProjectWithClient = ({ clientId, ...projectData }) => {
+  return { client: clients[clientId], ...projectData };
+};
+
 // The root provides a resolver function for each API endpoint
 const root = {
   // client queries
@@ -63,11 +64,10 @@ const root = {
   },
 
   // project queries
-  projects: () => {
-    return projects;
-  },
+  projects: () => projects.map((project) => getProjectWithClient(project)),
   project: ({ id }) => {
-    return projects.find((project) => project.id === id);
+    const project = projects.find((project) => project.id === id);
+    return getProjectWithClient(project);
   },
 
   // project mutations
