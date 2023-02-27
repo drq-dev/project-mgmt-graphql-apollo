@@ -1,9 +1,9 @@
 <script setup>
-defineProps({ secondary: Boolean })
+defineProps({ secondary: Boolean, text: Boolean })
 </script>
 
 <template>
-  <button type="button" :class="{ secondary: secondary }"><slot></slot></button>
+  <button type="button" :class="{ secondary: secondary, text: text }"><slot></slot></button>
 </template>
 
 <style scoped>
@@ -25,7 +25,7 @@ button {
   align-items: center;
   gap: 0.25rem;
   padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
+  border-radius: var(--default-border-radius);
   color: #ffffff;
   background-color: var(--primary-color);
 }
@@ -36,5 +36,11 @@ button:hover {
 
 .secondary {
   background-color: var(--secondary-color);
+}
+
+.text {
+  color: #000000;
+  background-color: #f9fafb;
+  padding: 0.75rem;
 }
 </style>
