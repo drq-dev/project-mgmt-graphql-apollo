@@ -17,6 +17,7 @@ import ProjectList from '../components/ProjectList.vue'
       </MyButton>
     </div>
     <ProjectList></ProjectList>
+    <hr />
   </div>
 </template>
 
@@ -28,5 +29,11 @@ import ProjectList from '../components/ProjectList.vue'
 .buttons {
   display: flex;
   gap: 1rem;
+}
+hr {
+  width: 100%;
+  height: 1px;
+  background-color: var(--default-border-color);
+  border: 0;
 }
 </style>
