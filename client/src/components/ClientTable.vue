@@ -2,6 +2,8 @@
 import { useQuery } from '@tanstack/vue-query'
 import { getClients } from '../queries/clientQueries'
 import MyButton from './MyButton.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
+
 const { isLoading, isError, data } = useQuery({
   queryKey: ['clients'],
   queryFn: getClients
@@ -21,7 +23,9 @@ const { isLoading, isError, data } = useQuery({
       <td>{{ client.name }}</td>
       <td>{{ client.email }}</td>
       <td>{{ client.phone }}</td>
-      <td><MyButton variant="error">remove</MyButton></td>
+      <td>
+        <MyButton variant="error" aria-label="Delete client."><Delete size="20"></Delete></MyButton>
+      </td>
     </tr>
   </table>
 </template>
