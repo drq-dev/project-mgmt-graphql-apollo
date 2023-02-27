@@ -1,8 +1,8 @@
 <script setup>
 import AccountPlus from 'vue-material-design-icons/AccountPlus.vue'
 import FormatListBulleted from 'vue-material-design-icons/FormatListBulleted.vue'
-
 import MyButton from '../components/MyButton.vue'
+import ProjectList from '../components/ProjectList.vue'
 </script>
 <template>
   <div class="container">
@@ -16,6 +16,7 @@ import MyButton from '../components/MyButton.vue'
         Add Project
       </MyButton>
     </div>
+    <ProjectList></ProjectList>
   </div>
 </template>
 

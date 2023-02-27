@@ -10,6 +10,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@tanstack/vue-query": "^4.24.10",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.1.0",
     "vue": "^3.2.47",
     "vue-material-design-icons": "^5.2.0",
     "vue-router": "^4.1.6"
