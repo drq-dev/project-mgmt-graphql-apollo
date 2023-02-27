@@ -8,7 +8,7 @@ console.log(props)
 <template>
   <div class="card">
     <h2 class="name">{{ project.name }}</h2>
-    <MyButton class="button" text>View</MyButton>
+    <MyButton class="button" variant="text">View</MyButton>
     <p class="status">
       Status: <strong>{{ project.status }}</strong>
     </p>

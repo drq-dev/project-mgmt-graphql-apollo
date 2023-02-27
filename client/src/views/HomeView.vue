@@ -8,11 +8,11 @@ import ProjectList from '../components/ProjectList.vue'
 <template>
   <div class="container">
     <div class="buttons">
-      <MyButton secondary>
+      <MyButton variant="secondary">
         <AccountPlus title="Add Client"></AccountPlus>
         Add Client
       </MyButton>
-      <MyButton>
+      <MyButton variant="primary">
         <FormatListBulleted title="Add Client"></FormatListBulleted>
         Add Project
       </MyButton>

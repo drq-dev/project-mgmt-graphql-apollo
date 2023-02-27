@@ -21,7 +21,7 @@ const { isLoading, isError, data } = useQuery({
       <td>{{ client.name }}</td>
       <td>{{ client.email }}</td>
       <td>{{ client.phone }}</td>
-      <td><MyButton>remove</MyButton></td>
+      <td><MyButton variant="error">remove</MyButton></td>
     </tr>
   </table>
 </template>

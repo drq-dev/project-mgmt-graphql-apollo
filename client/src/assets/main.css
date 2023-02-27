@@ -142,6 +142,7 @@ html {
 :root {
   --primary-color: #df3ca6;
   --secondary-color: #7430f9;
+  --error-color: #b02a37;
   --default-border-radius: 0.375rem;
   --default-border-color: #0000002d;
 }

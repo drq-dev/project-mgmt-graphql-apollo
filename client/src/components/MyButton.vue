@@ -1,9 +1,23 @@
 <script setup>
-defineProps({ secondary: Boolean, text: Boolean })
+const props = defineProps({
+  variant: {
+    type: String,
+    default: 'text',
+    validator(variant) {
+      if (!variant) return true
+      // The value must match one of these strings
+      return ['primary', 'secondary', 'text', 'error'].includes(variant)
+    }
+  },
+  secondary: Boolean,
+  text: Boolean
+})
+console.log(props)
+console.log(props.variant)
 </script>
 
 <template>
-  <button type="button" :class="{ secondary: secondary, text: text }"><slot></slot></button>
+  <button type="button" :class="[variant]"><slot></slot></button>
 </template>
 
 <style scoped>
@@ -27,13 +41,15 @@ button {
   padding: 0.25rem 0.5rem;
   border-radius: var(--default-border-radius);
   color: #ffffff;
-  background-color: var(--primary-color);
 }
 
 button:hover {
   opacity: 0.8;
 }
 
+.primary {
+  background-color: var(--primary-color);
+}
 .secondary {
   background-color: var(--secondary-color);
 }
@@ -42,5 +58,9 @@ button:hover {
   color: #000000;
   background-color: #f9fafb;
   padding: 0.75rem;
+}
+
+.error {
+  background-color: var(--error-color);
 }
 </style>
