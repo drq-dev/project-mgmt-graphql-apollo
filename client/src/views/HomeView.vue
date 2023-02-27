@@ -1,6 +1,7 @@
 <script setup>
 import AccountPlus from 'vue-material-design-icons/AccountPlus.vue'
 import FormatListBulleted from 'vue-material-design-icons/FormatListBulleted.vue'
+import ClientTable from '../components/ClientTable.vue'
 import MyButton from '../components/MyButton.vue'
 import ProjectList from '../components/ProjectList.vue'
 </script>
@@ -18,6 +19,7 @@ import ProjectList from '../components/ProjectList.vue'
     </div>
     <ProjectList></ProjectList>
     <hr />
+    <ClientTable></ClientTable>
   </div>
 </template>
 
