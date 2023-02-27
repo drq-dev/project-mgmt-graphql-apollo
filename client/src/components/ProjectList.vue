@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/vue-query'
 import { getProjects } from '../queries/projectQueries'
 import ProjectCard from './ProjectCard.vue'
-const { isLoading, isError, data, error } = useQuery({
+const { isLoading, isError, data } = useQuery({
   queryKey: ['projects'],
   queryFn: getProjects
 })
