@@ -1,9 +1,7 @@
 <script setup>
-import AccountPlus from 'vue-material-design-icons/AccountPlus.vue'
 import BulletinBoard from 'vue-material-design-icons/BulletinBoard.vue'
-import FormatListBulleted from 'vue-material-design-icons/FormatListBulleted.vue'
 
-import MyButton from './components/MyButton.vue'
+import HomeView from './views/HomeView.vue'
 </script>
 
 <template>
@@ -12,16 +10,7 @@ import MyButton from './components/MyButton.vue'
     Project Mgmt
   </header>
   <main>
-    <div class="buttons">
-      <MyButton secondary>
-        <AccountPlus title="Add Client"></AccountPlus>
-        Add Client
-      </MyButton>
-      <MyButton>
-        <FormatListBulleted title="Add Client"></FormatListBulleted>
-        Add Project
-      </MyButton>
-    </div>
+    <HomeView></HomeView>
   </main>
 </template>
 
@@ -36,13 +25,6 @@ header {
   background-color: #f8f9fa;
 }
 main {
-  display: grid;
-  gap: 1.5rem;
   margin: 1.5rem 5.75rem;
-}
-
-.buttons {
-  display: flex;
-  gap: 1rem;
 }
 </style>
