@@ -7,10 +7,9 @@ const { isLoading, isError, data, error } = useQuery({
   queryFn: getProjects
 })
 </script>
-
 <template>
-  <p v-if="isLoading">Is loading ...</p>
-  <p v-else-if="isError">Error: {{ error }}</p>
+  <p v-if="isLoading">Loading...</p>
+  <p v-else-if="isError">Something Went Wrong</p>
   <section v-else-if="data">
     <ProjectCard
       v-for="project in data.projects"
