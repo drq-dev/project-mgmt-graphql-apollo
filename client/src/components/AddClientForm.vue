@@ -1,7 +1,7 @@
 <script setup>
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
-import { reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import MyButton from '../components/MyButton.vue'
 
 const state = reactive({
@@ -9,6 +9,10 @@ const state = reactive({
   email: '',
   phone: ''
 })
+
+const nameRef = ref(null)
+const emailRef = ref(null)
+const phoneRef = ref(null)
 
 const rules = {
   name: { required },
@@ -18,24 +22,41 @@ const rules = {
 
 const v$ = useVuelidate(rules, state)
 
+const focusInvalidField = () => {
+  if (v$.value.name.$error) {
+    nameRef.value.focus()
+  } else if (v$.value.email.$error) {
+    emailRef.value.focus()
+  } else if (v$.value.phone.$error) {
+    phoneRef.value.focus()
+  }
+}
+
 const submit = async () => {
   const isFormCorrect = await v$.value.$validate()
-  if (!isFormCorrect) return
+  if (!isFormCorrect) {
+    focusInvalidField()
+    return
+  }
 }
+
+onMounted(() => {
+  nameRef.value.focus()
+})
 </script>
 
 <template>
   <form @submit.prevent="submit">
     <label for="name">Name</label>
-    <input id="name" type="text" v-model="state.name" />
+    <input id="name" type="text" v-model="state.name" ref="nameRef" />
     <p v-if="v$.name.$errors.length > 0" class="error-message">{{ v$.name.$errors[0].$message }}</p>
     <label for="email">Email</label>
-    <input id="email" type="email" v-model="state.email" />
+    <input id="email" type="email" v-model="state.email" ref="emailRef" />
     <p v-if="v$.email.$errors.length > 0" class="error-message">
       {{ v$.email.$errors[0].$message }}
     </p>
     <label for="phone">Phone</label>
-    <input id="phone" type="tel" v-model="state.phone" />
+    <input id="phone" type="tel" v-model="state.phone" ref="phoneRef" />
     <p v-if="v$.phone.$errors.length > 0" class="error-message">
       {{ v$.phone.$errors[0].$message }}
     </p>
