@@ -12,8 +12,6 @@ const props = defineProps({
   secondary: Boolean,
   text: Boolean
 })
-console.log(props)
-console.log(props.variant)
 </script>
 
 <template>

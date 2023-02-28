@@ -1,12 +1,23 @@
 <script setup>
-import { useQuery } from '@tanstack/vue-query'
+import { useQuery, useQueryClient } from '@tanstack/vue-query'
 import { getClients } from '../queries/clientQueries'
+import { removeClient } from '../mutations/clientMutations'
 import MyButton from './MyButton.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
+import { useMutation } from '@tanstack/vue-query'
 
 const { isLoading, isError, data } = useQuery({
   queryKey: ['clients'],
   queryFn: getClients
+})
+
+const queryClient = useQueryClient()
+
+const { mutate } = useMutation({
+  mutationFn: removeClient,
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['clients'] })
+  }
 })
 </script>
 <template>
@@ -24,7 +35,12 @@ const { isLoading, isError, data } = useQuery({
       <td>{{ client.email }}</td>
       <td>{{ client.phone }}</td>
       <td>
-        <MyButton variant="error" aria-label="Delete client."><Delete size="20"></Delete></MyButton>
+        <MyButton
+          variant="error"
+          aria-label="Delete client."
+          @click="mutate({ clientID: client.id })"
+          ><Delete :size="20"></Delete
+        ></MyButton>
       </td>
     </tr>
   </table>

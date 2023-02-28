@@ -1,8 +1,7 @@
 <script setup>
 import MyButton from './MyButton.vue'
 
-const props = defineProps({ project: { type: Object, required: true } })
-console.log(props)
+defineProps({ project: { type: Object, required: true } })
 </script>
 
 <template>
