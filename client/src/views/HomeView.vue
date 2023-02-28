@@ -1,4 +1,6 @@
 <script setup>
+// TODO: Create form components
+// TODO: Animation
 import { ref } from 'vue'
 import AccountPlus from 'vue-material-design-icons/AccountPlus.vue'
 import FormatListBulleted from 'vue-material-design-icons/FormatListBulleted.vue'

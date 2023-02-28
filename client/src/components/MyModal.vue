@@ -1,12 +1,17 @@
 <script setup>
+// TODO: Animation
 import { onMounted, ref, watch } from 'vue'
 import Close from 'vue-material-design-icons/Close.vue'
 import MyButton from './MyButton.vue'
+import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({ modelValue: { type: Boolean }, title: { type: String, default: '' } })
 const emit = defineEmits(['update:modelValue'])
 
 const modal = ref(null)
+const container = ref(null)
+
+onClickOutside(container, () => modal.value.close())
 
 watch(props, (newValue) => (newValue.modelValue ? modal.value.showModal() : modal.value.close()))
 
@@ -20,7 +25,7 @@ onMounted(() =>
 
 <template>
   <dialog ref="modal">
-    <div class="container">
+    <div ref="container" class="container">
       <header>
         <h2>{{ title }}</h2>
         <MyButton variant="icon" @click="emit('update:modelValue', false)">
@@ -45,6 +50,7 @@ onMounted(() =>
 }
 
 dialog::backdrop {
+  cursor: pointer;
   background-color: rgba(0, 0, 0, 0.35);
 }
 
