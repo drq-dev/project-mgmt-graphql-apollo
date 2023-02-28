@@ -1,9 +1,9 @@
 <script setup>
 // TODO: Create form components
-// TODO: Animation
 import { ref } from 'vue'
 import AccountPlus from 'vue-material-design-icons/AccountPlus.vue'
 import FormatListBulleted from 'vue-material-design-icons/FormatListBulleted.vue'
+import AddClientForm from '../components/AddClientForm.vue'
 import ClientTable from '../components/ClientTable.vue'
 import MyButton from '../components/MyButton.vue'
 import MyModal from '../components/MyModal.vue'
@@ -17,15 +17,7 @@ const isClientModalOpen = ref(false)
         <AccountPlus title="Add Client"></AccountPlus> Add Client
       </MyButton>
       <MyModal v-model="isClientModalOpen" title="Add Client">
-        <form>
-          <label for="name">Name</label>
-          <input id="name" type="text" />
-          <label for="email">Email</label>
-          <input id="email" type="email" />
-          <label for="phone">Phone</label>
-          <input id="phone" type="tel" />
-          <MyButton variant="secondary" type="submit">Submit</MyButton>
-        </form>
+        <AddClientForm></AddClientForm>
       </MyModal>
       <MyButton variant="primary" dense>
         <FormatListBulleted title="Add Client"></FormatListBulleted>
