@@ -33,7 +33,6 @@ defineProps({ project: { type: Object, required: true } })
 .button {
   grid-area: button;
   justify-self: end;
-  width: max-content;
 }
 
 .status {

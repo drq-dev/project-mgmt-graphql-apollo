@@ -39,6 +39,7 @@ const { mutate } = useMutation({
           variant="error"
           aria-label="Delete client."
           @click="mutate({ clientID: client.id })"
+          dense
           ><Delete :size="20"></Delete
         ></MyButton>
       </td>
