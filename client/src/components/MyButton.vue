@@ -66,6 +66,7 @@ button:focus {
   background-color: var(--error-color);
 }
 .icon {
+  padding: 0;
   color: hsl(0, 0%, 50%);
   background-color: unset;
 }
