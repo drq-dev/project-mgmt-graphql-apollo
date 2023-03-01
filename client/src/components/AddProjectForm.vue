@@ -111,7 +111,13 @@ const evalClientIdOptions = (clients) =>
     <p v-if="v$.name.$errors.length > 0" class="error-message">{{ v$.name.$errors[0].$message }}</p>
 
     <label for="description">Description</label>
-    <input id="description" type="string" v-model="state.description" ref="descriptionRef" />
+    <textarea
+      id="description"
+      type="string"
+      v-model="state.description"
+      ref="descriptionRef"
+      rows="5"
+    />
     <p v-if="v$.description.$errors.length > 0" class="error-message">
       {{ v$.description.$errors[0].$message }}
     </p>
@@ -185,6 +191,7 @@ label:first-child {
   margin-top: 0;
 }
 input,
+textarea,
 select {
   font-size: 1rem;
   padding: 0.75em;
@@ -193,6 +200,10 @@ select {
   border: 1px solid var(--default-border-color);
 }
 
+textarea {
+  font-size: 1rem;
+  font-family: inherit;
+}
 select {
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
