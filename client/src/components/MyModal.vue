@@ -1,5 +1,6 @@
 <script setup>
 // TODO: Animation
+// TODO: Prevent scrolling
 import { onMounted, ref, watch } from 'vue'
 import Close from 'vue-material-design-icons/Close.vue'
 import MyButton from './MyButton.vue'
