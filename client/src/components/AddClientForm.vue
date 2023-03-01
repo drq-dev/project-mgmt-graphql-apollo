@@ -1,7 +1,7 @@
 <script setup>
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
-import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import MyButton from '../components/MyButton.vue'
 import { useQueryClient } from '@tanstack/vue-query'
 import { useMutation } from '@tanstack/vue-query'
