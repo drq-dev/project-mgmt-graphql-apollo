@@ -25,7 +25,7 @@ const schema = buildSchema(`
   }
 
   type Mutation {
-    addClient(name: String, email: String, phone: String): Client
+    addClient(name: String!, email: String!, phone: String!): Client
     deleteClient(id: ID!): Client
     addProject(clientId: ID!, name: String!, description: String!, status: String!): Project
     deleteProject(id: ID!): Project

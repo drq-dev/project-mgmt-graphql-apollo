@@ -3,6 +3,9 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
 import { onMounted, reactive, ref } from 'vue'
 import MyButton from '../components/MyButton.vue'
+import { useQueryClient } from '@tanstack/vue-query'
+import { useMutation } from '@tanstack/vue-query'
+import { addClient } from '../mutations/clientMutations'
 
 const state = reactive({
   name: '',
@@ -32,12 +35,22 @@ const focusInvalidField = () => {
   }
 }
 
-const submit = async () => {
+const queryClient = useQueryClient()
+const { mutate } = useMutation({
+  mutationFn: addClient,
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['clients'] })
+  }
+})
+
+const submit = async (event) => {
   const isFormCorrect = await v$.value.$validate()
   if (!isFormCorrect) {
     focusInvalidField()
+    event.preventDefault()
     return
   }
+  mutate({ name: state.name, email: state.email, phone: state.phone })
 }
 
 onMounted(() => {
@@ -46,20 +59,23 @@ onMounted(() => {
 </script>
 
 <template>
-  <form @submit.prevent="submit">
+  <form @submit="submit">
     <label for="name">Name</label>
     <input id="name" type="text" v-model="state.name" ref="nameRef" />
     <p v-if="v$.name.$errors.length > 0" class="error-message">{{ v$.name.$errors[0].$message }}</p>
+
     <label for="email">Email</label>
     <input id="email" type="email" v-model="state.email" ref="emailRef" />
     <p v-if="v$.email.$errors.length > 0" class="error-message">
       {{ v$.email.$errors[0].$message }}
     </p>
+
     <label for="phone">Phone</label>
     <input id="phone" type="tel" v-model="state.phone" ref="phoneRef" />
     <p v-if="v$.phone.$errors.length > 0" class="error-message">
       {{ v$.phone.$errors[0].$message }}
     </p>
+
     <MyButton variant="secondary" type="submit" class="submit-button">Submit</MyButton>
   </form>
 </template>
