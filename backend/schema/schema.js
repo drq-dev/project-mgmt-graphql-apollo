@@ -48,7 +48,7 @@ const root = {
 
   // client mutations
   addClient: (args) => {
-    clients.push({ id: clients.length + 1, ...args });
+    clients.push({ id: `${clients.length + 1}`, ...args });
     return clients[clients.length - 1];
   },
   deleteClient: ({ id }) => {
@@ -72,7 +72,7 @@ const root = {
 
   // project mutations
   addProject: (args) => {
-    projects.push({ id: projects.length + 1, ...args });
+    projects.push({ id: `${projects.length + 1}`, ...args });
     return projects[projects.length - 1];
   },
   deleteProject: ({ id }) => {
