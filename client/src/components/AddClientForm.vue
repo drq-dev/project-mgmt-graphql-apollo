@@ -1,7 +1,7 @@
 <script setup>
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
-import { onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import MyButton from '../components/MyButton.vue'
 import { useQueryClient } from '@tanstack/vue-query'
 import { useMutation } from '@tanstack/vue-query'
@@ -47,6 +47,7 @@ const { isLoading, isError, isSuccess, mutate } = useMutation({
 
 watch(isSuccess, async (newValue) => {
   if (newValue) {
+    resetForm()
     emit('submitted')
   }
 })
@@ -63,6 +64,13 @@ const submit = async () => {
 onMounted(() => {
   nameRef.value.focus()
 })
+
+const resetForm = () => {
+  state.name = ''
+  state.email = ''
+  state.phone = ''
+  v$.value.$reset()
+}
 </script>
 
 <template>
