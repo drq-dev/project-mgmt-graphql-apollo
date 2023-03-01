@@ -1,11 +1,13 @@
 <script setup>
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import MyButton from '../components/MyButton.vue'
 import { useQueryClient } from '@tanstack/vue-query'
 import { useMutation } from '@tanstack/vue-query'
 import { addClient } from '../mutations/clientMutations'
+
+const emit = defineEmits(['submitted'])
 
 const state = reactive({
   name: '',
@@ -36,18 +38,23 @@ const focusInvalidField = () => {
 }
 
 const queryClient = useQueryClient()
-const { mutate } = useMutation({
+const { isLoading, isError, isSuccess, mutate } = useMutation({
   mutationFn: addClient,
   onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: ['clients'] })
   }
 })
 
-const submit = async (event) => {
+watch(isSuccess, async (newValue) => {
+  if (newValue) {
+    emit('submitted')
+  }
+})
+
+const submit = async () => {
   const isFormCorrect = await v$.value.$validate()
   if (!isFormCorrect) {
     focusInvalidField()
-    event.preventDefault()
     return
   }
   mutate({ name: state.name, email: state.email, phone: state.phone })
@@ -59,7 +66,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <form @submit="submit">
+  <form @submit.prevent="submit">
     <label for="name">Name</label>
     <input id="name" type="text" v-model="state.name" ref="nameRef" />
     <p v-if="v$.name.$errors.length > 0" class="error-message">{{ v$.name.$errors[0].$message }}</p>
@@ -76,7 +83,14 @@ onMounted(() => {
       {{ v$.phone.$errors[0].$message }}
     </p>
 
-    <MyButton variant="secondary" type="submit" class="submit-button">Submit</MyButton>
+    <div class="submit-container">
+      <MyButton variant="secondary" type="submit" class="submit-button" :disabled="isLoading"
+        >Submit</MyButton
+      >
+      <p v-if="isError" class="error-message">
+        Data could not be transmitted. Please try again or contact support.
+      </p>
+    </div>
   </form>
 </template>
 
@@ -93,7 +107,7 @@ label {
 }
 
 label,
-.submit-button {
+.submit-container {
   margin-top: 1rem;
 }
 
@@ -110,5 +124,11 @@ input {
 
 .error-message {
   color: var(--error-color);
+}
+
+.submit-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 </style>

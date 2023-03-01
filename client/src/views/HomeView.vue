@@ -17,7 +17,7 @@ const isClientModalOpen = ref(false)
         <AccountPlus title="Add Client"></AccountPlus> Add Client
       </MyButton>
       <MyModal v-model="isClientModalOpen" title="Add Client">
-        <AddClientForm></AddClientForm>
+        <AddClientForm @submitted="isClientModalOpen = false"></AddClientForm>
       </MyModal>
       <MyButton variant="primary" dense>
         <FormatListBulleted title="Add Client"></FormatListBulleted>
