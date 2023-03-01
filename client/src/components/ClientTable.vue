@@ -17,6 +17,7 @@ const { mutate } = useMutation({
   mutationFn: removeClient,
   onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: ['clients'] })
+    queryClient.invalidateQueries({ queryKey: ['projects'] })
   }
 })
 </script>

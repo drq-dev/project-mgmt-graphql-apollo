@@ -4,25 +4,30 @@ import { ref } from 'vue'
 import AccountPlus from 'vue-material-design-icons/AccountPlus.vue'
 import FormatListBulleted from 'vue-material-design-icons/FormatListBulleted.vue'
 import AddClientForm from '../components/AddClientForm.vue'
+import AddProjectForm from '../components/AddProjectForm.vue'
 import ClientTable from '../components/ClientTable.vue'
 import MyButton from '../components/MyButton.vue'
 import MyModal from '../components/MyModal.vue'
 import ProjectList from '../components/ProjectList.vue'
-const isClientModalOpen = ref(false)
+
+const isAddClientFormModalOpen = ref(false)
+const isAddProjectFormModalOpen = ref(false)
 </script>
 <template>
   <div class="container">
     <div class="buttons">
-      <MyButton variant="secondary" @click="isClientModalOpen = true" dense>
+      <MyButton variant="secondary" @click="isAddClientFormModalOpen = true" dense>
         <AccountPlus title="Add Client"></AccountPlus> Add Client
       </MyButton>
-      <MyModal v-model="isClientModalOpen" title="Add Client">
-        <AddClientForm @submitted="isClientModalOpen = false"></AddClientForm>
+      <MyModal v-model="isAddClientFormModalOpen" title="Add Client">
+        <AddClientForm @submitted="isAddClientFormModalOpen = false"></AddClientForm>
       </MyModal>
-      <MyButton variant="primary" dense>
-        <FormatListBulleted title="Add Client"></FormatListBulleted>
-        Add Project
+      <MyButton variant="primary" @click="isAddProjectFormModalOpen = true" dense>
+        <FormatListBulleted title="Add Project"></FormatListBulleted>Add Project
       </MyButton>
+      <MyModal v-model="isAddProjectFormModalOpen" title="Add Project">
+        <AddProjectForm @submitted="isAddProjectFormModalOpen = false"></AddProjectForm>
+      </MyModal>
     </div>
     <ProjectList></ProjectList>
     <hr />

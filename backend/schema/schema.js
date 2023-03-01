@@ -55,6 +55,7 @@ const root = {
     const index = clients.findIndex((client) => client.id === id);
     if (index === -1) return null;
 
+    //TODO: Remove client project
     [deletedClient] = clients.splice(
       clients.findIndex((client) => client.id === id),
       1
