@@ -1,16 +1,17 @@
 <script setup>
 import BulletinBoard from 'vue-material-design-icons/BulletinBoard.vue'
-
-import HomeView from './views/HomeView.vue'
 </script>
 
 <template>
   <header>
-    <BulletinBoard title="The project logo"></BulletinBoard>
-    Project Mgmt
+    <nav>
+      <RouterLink to="/" aria-label="Link to homepage"
+        ><BulletinBoard title="The project logo"></BulletinBoard> Project Mgmt
+      </RouterLink>
+    </nav>
   </header>
   <main>
-    <HomeView></HomeView>
+    <RouterView></RouterView>
   </main>
 </template>
 
@@ -26,5 +27,12 @@ header {
 }
 main {
   margin: 1.5rem 5.75rem;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  color: var(--primary-color);
+  text-decoration: none;
 }
 </style>
